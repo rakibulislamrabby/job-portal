@@ -3,6 +3,10 @@ import { useLoaderData, useParams } from "react-router-dom";
 import { LuCircleDollarSign, LuSubtitles } from "react-icons/lu";
 import { IoCallOutline } from "react-icons/io5";
 import { CiMail, CiLocationOn } from "react-icons/ci";
+import { ToastContainer, toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
+import { saveJobApplication } from "../utility/localstorage";
 
 const JobDetails = () => {
   const jobs = useLoaderData();
@@ -20,9 +24,11 @@ const JobDetails = () => {
     Educational_Requirements,
     Experiences,
   } = job;
+  const handleJobApplication = () => saveJobApplication(idInt);
+  toast("Applied Job Successfully");
   return (
     <div>
-      <h2 className="text-4xl font-bold text-center mt-16 pt-8 mb-28">
+      <h2 className="text-4xl font-bold text-center  pt-8 mb-28">
         Job Details
       </h2>
 
@@ -88,11 +94,15 @@ const JobDetails = () => {
           </div>
 
           <div>
-            <button className="bg-gradient-to-r from-blue-400 to-purple-500 w-full text-white rounded-md py-2 mt-8">
+            <button
+              onClick={handleJobApplication}
+              className="bg-gradient-to-r from-blue-400 to-purple-500 w-full text-white rounded-md py-2 mt-8"
+            >
               Apply Now
             </button>
           </div>
         </div>
+        <ToastContainer />
       </div>
     </div>
   );
